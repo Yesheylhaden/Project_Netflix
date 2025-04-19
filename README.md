@@ -1,4 +1,4 @@
-# Netflix Clone - Web101 Assign (kinda rushed)
+# Netflix Clone - Web101 Assign
 
 This is like a fake Netflix site made for Web101 class. I used React and Vite (first time using Vite tbh). It shows how to use routing, components, api call and all that. Not perfect but works.
 
