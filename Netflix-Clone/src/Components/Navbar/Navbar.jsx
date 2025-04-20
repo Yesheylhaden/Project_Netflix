@@ -2,37 +2,42 @@ import React, { useEffect, useState } from 'react';
 import './Navbar.css';
 
 function Navbar() {
-  const [show, handleShow] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        handleShow(true);
-      } else {
-        handleShow(false);
-      }
+      setShow(window.scrollY > 100);
     };
 
     window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      // Cleanup the event listener on component unmount
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <div className={`navbar ${show && 'nav__black'}`}>
-      <img
-        className="nav__logo"
-        src="http://www.freepnglogos.com/uploads/netflix-logo-0.png"
-        alt="NETFLIX"
-      />
-      <img
-        className="nav__avatar"
-        src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
-        alt="AVATAR"
-      />
+    <div className={`navbar ${show ? 'navbar--scrolled' : ''}`}>
+      <div className="navbar__contents">
+        <img
+          className="navbar__logo"
+          src="http://www.freepnglogos.com/uploads/netflix-logo-0.png"
+          alt="Netflix Logo"
+        />
+
+        <div className="navbar__menu">
+          <a href="#">Home</a>
+          <a href="#">TV Shows</a>
+          <a href="#">Movies</a>
+          <a href="#">My List</a>
+        </div>
+
+        <div className="navbar__right">
+          <button className="navbar__button">Cut Trailer</button>
+          <img
+            className="navbar__avatar"
+            src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+            alt="Avatar"
+          />
+        </div>
+      </div>
     </div>
   );
 }

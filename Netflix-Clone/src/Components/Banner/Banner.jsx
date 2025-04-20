@@ -6,43 +6,42 @@ import movieTrailer from 'movie-trailer';
 import YouTube from 'react-youtube';
 
 function Banner() {
-  const [movie, setMovie] = useState([]);
-  const [trailerurl, setTrailerurl] = useState("");
+  const [movie, setMovie] = useState(null);
+  const [trailerUrl, setTrailerUrl] = useState("");
 
   useEffect(() => {
-    async function fetchData() {
-      const request = await axios.get(requests.fetchNetflixOriginals);
+    const fetchBannerMovie = async () => {
+      try {
+        const response = await axios.get(requests.fetchNetflixOriginals);
+        const results = response.data.results;
+        setMovie(results[Math.floor(Math.random() * results.length)]);
+      } catch (err) {
+        console.error("Failed to fetch banner movie:", err);
+      }
+    };
 
-      setMovie(
-        request.data.results[
-          Math.floor(Math.random() * request.data.results.length)
-        ]
-      );
-    }
-
-    fetchData();
+    fetchBannerMovie();
   }, []);
 
-  function truncate(str, n) {
-    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
-  }
-
-  const handleClick = (movie) => {
-    if (trailerurl) {
-      setTrailerurl("");
+  const handleTrailer = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
     } else {
-      movieTrailer(movie?.name || "")
+      movieTrailer(movie?.name || movie?.title || movie?.original_name || "")
         .then((url) => {
           const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailerurl(urlParams.get('v'));
+          setTrailerUrl(urlParams.get("v"));
         })
-        .catch((error) => console.log(error));
+        .catch((err) => console.error("Trailer not found", err));
     }
   };
 
+  const truncate = (str, n) =>
+    str?.length > n ? str.substr(0, n - 1) + "..." : str;
+
   const opts = {
-    height: "390",
-    width: "100%",
+    height: '390',
+    width: '100%',
     playerVars: {
       autoplay: 1,
     },
@@ -52,12 +51,10 @@ function Banner() {
     <div>
       <header
         className="banner"
-        onClick={() => setTrailerurl("")}
+        onClick={() => setTrailerUrl("")}
         style={{
           backgroundSize: "cover",
-          backgroundImage: `url(
-            "https://image.tmdb.org/t/p/original/${movie?.backdrop_path}"
-          )`,
+          backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path || movie?.poster_path}")`,
           backgroundPosition: "center center",
         }}
       >
@@ -65,17 +62,23 @@ function Banner() {
           <h1 className="banner__title">
             {movie?.title || movie?.name || movie?.original_name}
           </h1>
+
           <div className="banner__buttons">
-            <button onClick={() => handleClick(movie)} className="banner__button">
-              Play
-            </button>
+            <button className="banner__button" onClick={() => handleTrailer(movie)}>Play</button>
             <button className="banner__button">My List</button>
           </div>
-          <h1 className="banner__description">{truncate(movie?.overview, 150)}</h1>
+
+          <p className="banner__description">{truncate(movie?.overview, 150)}</p>
         </div>
+
         <div className="banner--fadeBottom" />
       </header>
-      {trailerurl && <YouTube videoId={trailerurl} opts={opts} />}
+
+      {trailerUrl && (
+        <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
+          <YouTube videoId={trailerUrl} opts={opts} />
+        </div>
+      )}
     </div>
   );
 }
