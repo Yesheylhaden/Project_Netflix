@@ -1,100 +1,100 @@
 .banner {
-  color: white;
-  height: 630px;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  padding: 0 3rem 10rem;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  z-index: 1;
-  overflow: hidden;
+  color: white; /* Sets the text color to white */
+  height: 630px; /* Sets the height of the banner */
+  position: relative; /* Positions the banner relatively for child elements */
+  display: flex; /* Uses flexbox layout */
+  align-items: flex-end; /* Aligns child elements to the bottom */
+  padding: 0 3rem 10rem; /* Adds padding (top, left/right, bottom) */
+  background-repeat: no-repeat; /* Ensures the background doesn't repeat */
+  background-size: cover; /* Makes the background cover the entire banner */
+  background-position: center; /* Centers the background image */
+  z-index: 1; /* Places the banner above other elements */
+  overflow: hidden; /* Prevents child elements from overflowing */
 }
 
 .banner__contents {
-  max-width: 600px;
-  z-index: 2;
-  position: relative;
+  max-width: 600px; /* Sets the maximum width of the content */
+  z-index: 2; /* Ensures content is above the banner's background */
+  position: relative; /* Positions the content relatively within the banner */
 }
 
 .banner__title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.75);
+  font-size: 3rem; /* Sets the font size for the title */
+  font-weight: 800; /* Makes the title text bold */
+  margin-bottom: 1rem; /* Adds space below the title */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.75); /* Adds shadow for better text visibility */
 }
 
 .banner__description {
-  line-height: 1.4;
-  font-size: 1.1rem;
-  max-width: 480px;
-  margin-top: 1rem;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  line-height: 1.4; /* Increases the line height for readability */
+  font-size: 1.1rem; /* Sets the font size of the description */
+  max-width: 480px; /* Limits the width of the description */
+  margin-top: 1rem; /* Adds space above the description */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Adds shadow to the description for contrast */
 }
 
 .banner__buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.2rem;
+  display: flex; /* Uses flexbox to lay out the buttons */
+  gap: 1rem; /* Adds space between buttons */
+  margin-top: 1.2rem; /* Adds space above the buttons */
 }
 
 .banner__button {
-  cursor: pointer;
-  color: #fff;
-  border: none;
-  font-weight: 700;
-  border-radius: 4px;
-  padding: 0.7rem 2.2rem;
-  font-size: 1rem;
-  background-color: rgba(51, 51, 51, 0.7);
-  transition: all 0.3s ease;
+  cursor: pointer; /* Changes the cursor to a pointer on hover */
+  color: #fff; /* Sets text color to white */
+  border: none; /* Removes any default borders */
+  font-weight: 700; /* Makes the button text bold */
+  border-radius: 4px; /* Rounds the corners of the button */
+  padding: 0.7rem 2.2rem; /* Adds padding inside the button */
+  font-size: 1rem; /* Sets the font size */
+  background-color: rgba(51, 51, 51, 0.7); /* Sets a semi-transparent background */
+  transition: all 0.3s ease; /* Adds a smooth transition effect on hover */
 }
 
 .banner__button:hover {
-  background-color: #e6e6e6;
-  color: #000;
-  transform: scale(1.05);
+  background-color: #e6e6e6; /* Changes background color on hover */
+  color: #000; /* Changes text color on hover */
+  transform: scale(1.05); /* Slightly enlarges the button on hover */
 }
 
 .banner--fadeBottom {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 7.4rem;
-  background-image: linear-gradient(
+  position: absolute; /* Positions the fade effect at the bottom of the banner */
+  bottom: 0; /* Anchors it to the bottom */
+  width: 100%; /* Makes it the full width of the banner */
+  height: 7.4rem; /* Sets the height of the fade effect */
+  background-image: linear-gradient( /* Creates a gradient effect */
     180deg,
     transparent,
     rgba(20, 20, 20, 0.7),
     #111
   );
-  z-index: 1;
+  z-index: 1; /* Ensures the fade is below the content */
 }
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
   .banner {
-    height: 480px;
-    padding: 0 1.5rem 6rem;
+    height: 480px; /* Reduces the banner height for smaller screens */
+    padding: 0 1.5rem 6rem; /* Adjusts padding for smaller screens */
   }
 
   .banner__title {
-    font-size: 2rem;
+    font-size: 2rem; /* Reduces the title font size on smaller screens */
   }
 
   .banner__description {
-    font-size: 0.95rem;
-    max-width: 100%;
+    font-size: 0.95rem; /* Reduces the description font size */
+    max-width: 100%; /* Makes the description take up full width */
   }
 
   .banner__buttons {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; /* Stacks the buttons vertically */
+    align-items: flex-start; /* Aligns buttons to the left */
   }
 
   .banner__button {
-    width: auto;
-    padding: 0.5rem 1.5rem;
-    font-size: 0.9rem;
+    width: auto; /* Adjusts button width */
+    padding: 0.5rem 1.5rem; /* Reduces button padding */
+    font-size: 0.9rem; /* Reduces font size for buttons */
   }
 }

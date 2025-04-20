@@ -1,86 +1,85 @@
 .row {
-    margin-left: 20px;
-    color: #fff;
-    position: relative;
-  }
-  
-  .row h2 {
-    margin-left: 20px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-  
-  .row__posters {
-    display: flex;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    padding: 0 20px;
-    scroll-behavior: smooth;
-  }
-  
-  .row__posters::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .row__poster {
-    width: 100%;
-    max-height: 100px;
-    object-fit: contain;
-    margin-right: 10px;
-    transition: transform 450ms;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .row__poster:hover {
-    transform: scale(1.08);
-  }
-  
-  .row__posterLarge {
-    max-height: 230px;
-  }
-  
-  .row__posterLarge:hover {
-    transform: scale(1.09);
-  }
-  
-  .trailerUrl-container {
-    margin-top: 20px;
-    padding: 0 20px;
-  }
-  
-  .youtube {
-    max-width: 100%;
-    margin-top: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-  }
-  
-  .cutButton {
-    margin-top: 10px;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    background-color: #e50914;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .cutButton:hover {
-    background-color: #f40612;
-  }
-  
-  #not-found {
-    margin-top: 10px;
-    background-color: rgba(255, 0, 0, 0.1);
-    color: #ff5c5c;
-    padding: 8px 16px;
-    font-weight: bold;
-    border-left: 4px solid #ff5c5c;
-    border-radius: 4px;
-  }
-  
+  margin-left: 20px; /* Add left margin for spacing */
+  color: #fff; /* Set text color to white */
+  position: relative; /* Allow for absolute positioning of child elements */
+}
+
+.row h2 {
+  margin-left: 20px; /* Add left margin for spacing */
+  font-size: 1.4rem; /* Set font size */
+  font-weight: 600; /* Set font weight to bold */
+  margin-bottom: 12px; /* Add space below the heading */
+}
+
+.row__posters {
+  display: flex; /* Use flexbox to display posters in a row */
+  overflow-y: hidden; /* Hide vertical overflow */
+  overflow-x: scroll; /* Enable horizontal scrolling */
+  padding: 0 20px; /* Add horizontal padding */
+  scroll-behavior: smooth; /* Smooth scrolling for the horizontal scrollbar */
+}
+
+.row__posters::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar */
+}
+
+.row__poster {
+  width: 100%; /* Set the width to 100% (responsive) */
+  max-height: 100px; /* Set a maximum height for the poster */
+  object-fit: contain; /* Make sure the image maintains its aspect ratio */
+  margin-right: 10px; /* Add space to the right of the poster */
+  transition: transform 450ms; /* Smooth transform transition */
+  border-radius: 4px; /* Round the corners of the poster */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.row__poster:hover {
+  transform: scale(1.08); /* Scale up the poster slightly on hover */
+}
+
+.row__posterLarge {
+  max-height: 230px; /* Set a larger maximum height for larger posters */
+}
+
+.row__posterLarge:hover {
+  transform: scale(1.09); /* Scale up the larger poster slightly on hover */
+}
+
+.trailerUrl-container {
+  margin-top: 20px; /* Add space on top */
+  padding: 0 20px; /* Add horizontal padding */
+}
+
+.youtube {
+  max-width: 100%; /* Ensure the YouTube video doesn't exceed container width */
+  margin-top: 10px; /* Add space on top */
+  border-radius: 10px; /* Round the corners of the video */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* Add shadow around the video */
+}
+
+.cutButton {
+  margin-top: 10px; /* Add space above the button */
+  padding: 8px 16px; /* Add padding inside the button */
+  font-size: 0.9rem; /* Set font size */
+  font-weight: 600; /* Set font weight to bold */
+  background-color: #e50914; /* Set background color (Netflix red) */
+  color: white; /* Set text color to white */
+  border: none; /* Remove the default border */
+  border-radius: 4px; /* Round the corners of the button */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.2s ease; /* Smooth transition for background color on hover */
+}
+
+.cutButton:hover {
+  background-color: #f40612; /* Change background color on hover */
+}
+
+#not-found {
+  margin-top: 10px; /* Add space above the element */
+  background-color: rgba(255, 0, 0, 0.1); /* Set a red background with slight opacity */
+  color: #ff5c5c; /* Set text color to red */
+  padding: 8px 16px; /* Add padding inside the notification */
+  font-weight: bold; /* Make the text bold */
+  border-left: 4px solid #ff5c5c; /* Add a red left border */
+  border-radius: 4px; /* Round the corners of the notification */
+}
