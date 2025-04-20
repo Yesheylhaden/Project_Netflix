@@ -13,6 +13,13 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleCutTrailer = () => {
+    const bannerSection = document.getElementById('banner');
+    if (bannerSection) {
+      bannerSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className={`navbar ${show ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__contents">
@@ -22,15 +29,10 @@ function Navbar() {
           alt="Netflix Logo"
         />
 
-        <div className="navbar__menu">
-          <a href="#">Home</a>
-          <a href="#">TV Shows</a>
-          <a href="#">Movies</a>
-          <a href="#">My List</a>
-        </div>
-
         <div className="navbar__right">
-          <button className="navbar__button">Cut Trailer</button>
+          <button className="navbar__button" onClick={handleCutTrailer}>
+            Cut Trailer
+          </button>
           <img
             className="navbar__avatar"
             src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"

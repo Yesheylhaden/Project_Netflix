@@ -19,7 +19,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
   const [showTrailerNotFound, setShowTrailerNotFound] = useState(false);
   const [playingIndex, setPlayingIndex] = useState(null);
 
-  // Fetch movie data when the component mounts or fetchUrl changes
   useEffect(() => {
     async function fetchData() {
       try {
@@ -32,80 +31,62 @@ function Row({ title, fetchUrl, isLargeRow }) {
     fetchData();
   }, [fetchUrl]);
 
-  // Handle click on a movie poster to show its trailer
   const handleClick = (movie, index) => {
-    if (playingIndex !== null) {
+    if (playingIndex === index) {
       setTrailerUrl("");
       setPlayingIndex(null);
+      return;
     }
 
-    if (playingIndex !== index) {
-      setPlayingIndex(index);
-
-      // Find and set the YouTube trailer URL for the selected movie
-      movieTrailer(movie?.name || "")
-        .then((url) => {
-          const urlParams = new URLSearchParams(new URL(url).search);
-          setTrailerUrl(urlParams.get('v'));
-          setShowTrailerNotFound(false);
-        })
-        .catch(() => {
-          // If the trailer is not found, show a message for a short time
-          setTrailerUrl("");
-          setShowTrailerNotFound(true);
-          setTimeout(() => {
-            setShowTrailerNotFound(false);
-          }, 1000);
-        });
-    }
+    setPlayingIndex(index);
+    movieTrailer(movie?.name || movie?.title || movie?.original_name || "")
+      .then((url) => {
+        const urlParams = new URLSearchParams(new URL(url).search);
+        setTrailerUrl(urlParams.get('v'));
+        setShowTrailerNotFound(false);
+      })
+      .catch(() => {
+        setTrailerUrl("");
+        setShowTrailerNotFound(true);
+        setTimeout(() => setShowTrailerNotFound(false), 800);
+      });
   };
 
-  // Handle click on "Cut Trailer" button to stop and hide the trailer
   const handleCutTrailer = () => {
     setTrailerUrl("");
     setPlayingIndex(null);
   };
 
-  const youtubeContainerKey = trailerUrl ? `youtube-${trailerUrl}` : 'youtube';
-
   return (
     <div className="row">
       <h2>{title}</h2>
+
       <div className="row__posters">
         {movies?.map((movie, index) => (
           <img
             key={movie.id}
             onClick={() => handleClick(movie, index)}
-            className={`row__poster  ${isLargeRow && "row__posterLarge"} `}
+            className={`row__poster ${isLargeRow ? "row__posterLarge" : ""}`}
             src={`${baseUrl}${isLargeRow ? movie?.poster_path : movie?.backdrop_path}`}
-            alt={movie.name}
+            alt={movie?.name || movie?.title}
           />
         ))}
       </div>
-      <div className='trailerUrl-container'>
+
+      <div className="trailerUrl-container">
         {trailerUrl ? (
-          // Wrap the YouTube component in a container with a unique key
-          <div key={youtubeContainerKey}>
-            <YouTube
-              videoId={trailerUrl}
-              opts={opts}
-              className='youtube'
-            />
-            <button
-              className="cutButton"
-              onClick={handleCutTrailer}
-            >
+          <div key={`youtube-${trailerUrl}`}>
+            <YouTube videoId={trailerUrl} opts={opts} className="youtube" />
+            <button className="cutButton" onClick={handleCutTrailer}>
               Cut Trailer
             </button>
           </div>
         ) : (
-          <div id='not-found'>
-            {showTrailerNotFound && (
-              <h3>
-                Trailer not found
-              </h3>
-            )}
-          </div>
+          showTrailerNotFound && (
+            <div id="not-found">
+              <h3>Trailer not found</h3>
+            </div>
+          )
         )}
       </div>
     </div>

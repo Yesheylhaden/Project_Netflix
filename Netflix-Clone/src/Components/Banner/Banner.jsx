@@ -36,6 +36,15 @@ function Banner() {
     }
   };
 
+  const handleMyList = () => {
+    const existingList = JSON.parse(localStorage.getItem('myList')) || [];
+    const isAlreadyAdded = existingList.find(item => item.id === movie?.id);
+
+    if (!isAlreadyAdded && movie) {
+      localStorage.setItem('myList', JSON.stringify([...existingList, movie]));
+    }
+  };
+
   const truncate = (str, n) =>
     str?.length > n ? str.substr(0, n - 1) + "..." : str;
 
@@ -48,7 +57,7 @@ function Banner() {
   };
 
   return (
-    <div>
+    <div id="banner">
       <header
         className="banner"
         onClick={() => setTrailerUrl("")}
@@ -65,7 +74,7 @@ function Banner() {
 
           <div className="banner__buttons">
             <button className="banner__button" onClick={() => handleTrailer(movie)}>Play</button>
-            <button className="banner__button">My List</button>
+            <button className="banner__button" onClick={handleMyList}>My List</button>
           </div>
 
           <p className="banner__description">{truncate(movie?.overview, 150)}</p>
