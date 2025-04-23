@@ -16,9 +16,24 @@ This is the backend server for a Netflix Clone application, developed using **No
 ---
 
 ##  Folder Structure
-
-netflix-backend/ ├── config/ │ └── db.js # MongoDB connection setup ├── controllers/ │ ├── authController.js # Logic for login and registration │ └── movieController.js # Logic for movie CRUD operations ├── models/ │ ├── User.js # Mongoose model for users │ └── Movie.js # Mongoose model for movies ├── routes/ │ ├── authRoute.js # /api/v1/auth routes │ └── movieRoute.js # /api/v1/movies routes ├── server.js # Main Express server entry ├── .env # Environment variable configuration ├── package.json └── README.md
-
+```bash
+netflix-backend/
+├── config/
+│   └── db.js                  # MongoDB connection logic
+├── controllers/
+│   ├── authController.js      # Handles user register & login
+│   └── movieController.js     # Handles movie CRUD operations
+├── models/
+│   ├── User.js                # User schema & validation
+│   └── Movie.js               # Movie schema & validation
+├── routes/
+│   ├── authRoute.js           # Routes for /api/v1/auth
+│   └── movieRoute.js          # Routes for /api/v1/movies
+├── server.js                  # Main entry file for Express app
+├── .env                       # Contains environment variables
+├── package.json               # Project dependencies
+└── README.md   
+```
 
 ![Folder Structure](../netflix-backend/Structure.jpg)
 
